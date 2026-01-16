@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DiplomObsAlarm.AdminEnterPage"
+             Title="AdminEnterPage">
+    <VerticalStackLayout>
+        <Image Source="logo.png"
+       Margin="20"
+           HeightRequest="41"
+           HorizontalOptions="Start"/>
+        <Label
+            Margin="20,0,20,0"
+            Text="Для входа в панель управления вам необходимо ввести логин и пароль администратора"
+       HorizontalOptions="Center"
+       FontSize="18"
+       FontAttributes="Bold"/>
+        <Grid Margin="20,20,20,0"
+            RowDefinitions="auto,auto"
+            VerticalOptions="Start"
+            HorizontalOptions="Fill">
+            
+            <Entry x:Name="login"
+                   Grid.Row="0"
+                Placeholder="Введите логин"
+                FontSize="20"
+                MaxLength="20"/>
+            <Entry x:Name="password"
+                   Margin="0,10,0,0"
+                   Grid.Row="1"
+                   Placeholder="Введите пароль"
+                    FontSize="20"
+                    MaxLength="20"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
