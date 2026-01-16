@@ -3,33 +3,113 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DiplomObsAlarm.AdminEnterPage"
              Title="AdminEnterPage">
-    <VerticalStackLayout>
-        <Image Source="logo.png"
-       Margin="20"
-           HeightRequest="41"
-           HorizontalOptions="Start"/>
-        <Label
-            Margin="20,0,20,0"
-            Text="Для входа в панель управления вам необходимо ввести логин и пароль администратора"
-       HorizontalOptions="Center"
-       FontSize="18"
-       FontAttributes="Bold"/>
-        <Grid Margin="20,20,20,0"
-            RowDefinitions="auto,auto"
-            VerticalOptions="Start"
-            HorizontalOptions="Fill">
-            
-            <Entry x:Name="login"
-                   Grid.Row="0"
-                Placeholder="Введите логин"
-                FontSize="20"
-                MaxLength="20"/>
-            <Entry x:Name="password"
-                   Margin="0,10,0,0"
-                   Grid.Row="1"
-                   Placeholder="Введите пароль"
+    <Grid RowDefinitions="Auto, *, Auto">
+        <VerticalStackLayout 
+            Grid.Row="0"
+            Margin="20"
+            Spacing="20">
+            <!--кароче надо разделить на квадратки и заполнять как картинку по номерам-->
+            <!--logo-->
+            <Image 
+                Source="logo.png"
+                HeightRequest="41"
+                HorizontalOptions="Start" />
+            <!--role-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label 
+                    Grid.Column="1"
+                    Grid.ColumnSpan="4"
+                    Grid.Row="0"
+                Text="Для входа в панель администратора вам нужно ввести ваш логин и пароль."
+                HorizontalOptions="Center"
+                FontSize="18"
+                FontAttributes="Bold" />
+            </Grid>
+            <Grid RowDefinitions="auto,auto">
+                <Entry 
+                    x:Name="login"
+                    Grid.Row="0"
+                    Placeholder="Введите логин"
                     FontSize="20"
                     MaxLength="20"/>
-        </Grid>
-    </VerticalStackLayout>
+                <Entry 
+                    x:Name="password"
+                    Grid.Row="1"
+                    Placeholder="Введите пароль"
+                    FontSize="20"
+                    MaxLength="20"/>
+            </Grid>
+
+
+            <!--Button-->
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
+                <!--admin-->
+                <Border
+                    Stroke="Black"
+                    Background="Black"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="60"/>
+                    </Border.StrokeShape>
+                    <ImageButton
+                        Clicked="OnAdminClicked"
+                        Source="admin.png"
+                        WidthRequest="70"
+                        HeightRequest="70"/>
+                </Border>
+
+                <!--user-->
+                <Border 
+                    Stroke="Black"
+                    Background="Black"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="60"/>
+                    </Border.StrokeShape>
+                    <ImageButton
+                        Clicked="OnUserClicked"
+                        Source="user.png"
+                        WidthRequest="70"
+                        HeightRequest="70"/>
+                </Border>
+            </Grid>
+
+            <!--info-->
+            <Label
+                Text="Админ - отправляет уведомления о различных угрозах, а пользователь получает их."
+                FontSize="16"
+                HorizontalTextAlignment="Start" />
+
+            <Label
+                Text="Пользователь - Получает уведомления."
+                FontSize="16"
+                HorizontalTextAlignment="Start" />
+        </VerticalStackLayout>
+        <!--nicego-->
+        <!--row 1 == pusto >>> pruzjinka-->
+        <!-- futer >>> snizu prizjat -->
+        <Label
+            Grid.Row="2"
+            Text="Приложение создано в целях безопасности студентов и работников, проживающих и работающих в общежитии, для сообщения о различных угрозах, тем кто находится в общежитии и за её пределами, для большей безопасности."
+            FontSize="10"
+            Margin="20"
+            HorizontalTextAlignment="Center"
+            VerticalOptions="End" />
+
+    </Grid>
 </ContentPage>
