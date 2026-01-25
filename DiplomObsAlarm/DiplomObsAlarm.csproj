@@ -65,10 +65,16 @@
 	  <Compile Update="AdminEnterPage.xaml.cs">
 	    <DependentUpon>AdminEnterPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="AdminPanelPage.xaml.cs">
+	    <DependentUpon>AdminPanelPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="AdminEnterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AdminPanelPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

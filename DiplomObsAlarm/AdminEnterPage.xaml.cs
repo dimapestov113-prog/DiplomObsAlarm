@@ -9,10 +9,10 @@ public partial class AdminEnterPage : ContentPage
     }
     private async void OnExitClicked(object? sender, EventArgs e)
     {
-        await Navigation.PopAsync();
+        await Navigation.PopModalAsync();
     }
     private async void OnEnterClicked(object? sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AdminPanelPage());
+        await Navigation.PushModalAsync(new AdminPanelPage());
     }
 }
