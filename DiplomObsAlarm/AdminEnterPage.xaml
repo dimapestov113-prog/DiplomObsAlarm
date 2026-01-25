@@ -4,7 +4,31 @@
              x:Class="DiplomObsAlarm.AdminEnterPage"
              Title="AdminEnterPage">
     <Grid x:Name="GeneralSetting">
-        <Label Text="GKJDFOg" Grid.Column="0" Grid.Row="3" Grid.RowSpan="3"/>
-        <Label Text="ppp" Grid.Row="0" Grid.Column="10" Grid.RowSpan="2"/>
-    </Grid>
+        <Image Source="logo.png" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="LabelEnter" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="13" Grid.RowSpan="6" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" Text="Для входа вам необходимо ввести ваш логин и пароль."/>
+        <Border  Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="17" Grid.RowSpan="3">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"/>
+            </Border.StrokeShape>
+            <Entry x:Name="AdminPassword" Placeholder ="Пароль:" />
+        </Border>
+        <Border Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="17" Grid.RowSpan="3">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"/>
+            </Border.StrokeShape>
+            <Entry x:Name="AdminLogin" Placeholder ="Логин:" />
+        </Border>
+        <Button Grid.Column="1" Grid.Row="19" Grid.ColumnSpan="7" Grid.RowSpan="3" FontAttributes="Bold" Text="Отмена" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5" Clicked="OnExitClicked">
+            <Button.Shadow>
+                <Shadow Brush="Gray" Offset="0,5" Radius="2" Opacity="0.5"/>
+            </Button.Shadow>
+        </Button>
+        <Button Grid.Column="11" Grid.Row="19" Grid.ColumnSpan="7" Grid.RowSpan="3" FontAttributes="Bold" Text="Вход" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5" Clicked="OnEnterClicked">
+            <Button.Shadow>
+                <Shadow Brush="blue" Offset="0,5" Radius="2" Opacity="0.4"/>
+            </Button.Shadow>
+        </Button>
+        <Label HorizontalOptions="Center" FontSize="13" Grid.ColumnSpan="17" Grid.RowSpan="7" Grid.Row="25" Grid.Column="1" Text="Если вы являетесь новым администратором и не можете войти в приложение, то обратитесь к заведующим общежития. Логины и пароли выдаются строго ими. В течении 3-х дней вам создадут ваш личный логин и пароль, для входа."/>
+        <Label Grid.Column="1" Grid.Row="36" Grid.ColumnSpan="17" Grid.RowSpan="4" FontAttributes="Italic" FontSize="10" Text="Данные для администрации хранить строго в секрете. Последстивия будут серьезными (кастрация(()"/>
+    </Grid> 
 </ContentPage>
