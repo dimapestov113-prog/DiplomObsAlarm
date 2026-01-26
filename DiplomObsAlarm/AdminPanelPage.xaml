@@ -19,7 +19,7 @@
             <Image Source="terr.jpg"/>
         </Border>
         <Label Text='Уведомление "Террор"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="11" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
-        <Switch x:Name="TerrorSwitch" IsToggled="False" Toggled="TerrorSwitch_Toggled" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="11" Grid.ColumnSpan="3"/>
+        <Switch x:Name="TerrorSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="11" Grid.ColumnSpan="3"/>
 <!--fire-->
         <Border Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
             <Border.StrokeShape>
@@ -33,7 +33,7 @@
             <Image Source="fire.png"/>
         </Border>
         <Label Text='Уведомление "Пожар"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="16" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
-        <Switch x:Name="FireSwitch" IsToggled="False" Toggled="FireSwitch_Toggled" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="16" Grid.ColumnSpan="3"/>
+        <Switch x:Name="FireSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="16" Grid.ColumnSpan="3"/>
 <!--bpla-->
         <Border Grid.Column="1" Grid.Row="21" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
             <Border.StrokeShape>
@@ -47,7 +47,7 @@
             <Image Source="bpla.png"/>
         </Border>
         <Label Text='Уведомление "БПЛА"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="21" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
-        <Switch x:Name="BplaSwitch" IsToggled="False" Toggled="BplaSwitch_Toggled" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="21" Grid.ColumnSpan="3"/>
+        <Switch x:Name="BplaSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="21" Grid.ColumnSpan="3"/>
 
         <Border Grid.Column="1" Grid.Row="26" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
             <Border.StrokeShape>
@@ -58,7 +58,7 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="40"/>
             </Border.StrokeShape>
-            <Image Source="history.png"/>
+            <Image Source="history.png"/>    
         </Border>
         <Label Text='История тревог' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="26" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
         <!--временно-->

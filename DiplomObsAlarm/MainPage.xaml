@@ -26,3 +26,4 @@
         <Label Grid.Row="31" Grid.Column="1" Grid.ColumnSpan="17" Grid.RowSpan="6" Text="Приложение созданно в целях безопасности студентов и работников, проживающихи работающих в общежитии, для сообщения о различных угрозах тем, кто находится в общежитии и за ее пределами, для большей безопасности. " HorizontalOptions="Start" VerticalOptions="Center" TextDecorations="Underline" FontAttributes="Italic" FontSize="12"/>
     </Grid>
 </ContentPage>
+        
