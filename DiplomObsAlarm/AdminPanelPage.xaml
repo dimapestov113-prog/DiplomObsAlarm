@@ -2,71 +2,96 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DiplomObsAlarm.AdminPanelPage">
-    <Grid x:Name="SettingAdmin">
-        <Image Source="logo.png" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="13" Grid.RowSpan="6" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" Text="Добро пожаловать в панель администрации."/>
-        <Label Text="В случае различных ЧС выбрать нужную кнопку тревоги" HorizontalOptions="Center" Grid.Column="1" Grid.Row="9" FontSize="10" Grid.ColumnSpan="17"/>
-<!--terror-->
-        <Border Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
-        </Border>
-        <Border Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="Center" VerticalOptions="Center" Margin="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="40"/>
-            </Border.StrokeShape>
-            <Image Source="terr.jpg"/>
-        </Border>
-        <Label Text='Уведомление "Террор"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="11" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
-        <Switch x:Name="TerrorSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="11" Grid.ColumnSpan="3"/>
-<!--fire-->
-        <Border Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
-        </Border>
-        <Border Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="Center" VerticalOptions="Center" Margin="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="40"/>
-            </Border.StrokeShape>
-            <Image Source="fire.png"/>
-        </Border>
-        <Label Text='Уведомление "Пожар"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="16" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
-        <Switch x:Name="FireSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="16" Grid.ColumnSpan="3"/>
-<!--bpla-->
-        <Border Grid.Column="1" Grid.Row="21" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
-        </Border>
-        <Border Grid.Column="1" Grid.Row="21" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="Center" VerticalOptions="Center" Margin="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="40"/>
-            </Border.StrokeShape>
-            <Image Source="bpla.png"/>
-        </Border>
-        <Label Text='Уведомление "БПЛА"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="21" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
-        <Switch x:Name="BplaSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="21" Grid.ColumnSpan="3"/>
+    <Grid RowDefinitions="*,auto">
+        <ContentView Grid.Row="0" IsVisible="True" x:Name="opovesheniya" >
+            <Grid x:Name="SettingAdmin" Background="White">
+                <Image Source="logo.png" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Label TextColor="Black" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="13" Grid.RowSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" Text="Рассылка уведоомлений"/>
+                <Label TextColor="Black" Text="В случае различных ЧС выбрать нужную кнопку тревоги" HorizontalOptions="Center" Grid.Column="1" Grid.Row="5" FontSize="10" Grid.RowSpan="2" VerticalOptions="Center" Grid.ColumnSpan="17"/>
 
-        <Border Grid.Column="1" Grid.Row="26" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="15"/>
-            </Border.StrokeShape>
-        </Border>
-        <Border Grid.Column="1" Grid.Row="26" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="Center" VerticalOptions="Center" Margin="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="40"/>
-            </Border.StrokeShape>
-            <Image Source="history.png"/>    
-        </Border>
-        <Label Text='История тревог' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="26" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
-        <!--временно-->
-        <Button Grid.Column="1" Grid.Row="35" Grid.ColumnSpan="17" Grid.RowSpan="3" FontAttributes="Bold" Text="Назад (временная кнопка)" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5" Clicked="OnExitClicked">
-            <Button.Shadow>
-                <Shadow Brush="Gray" Offset="0,5" Radius="2" Opacity="0.5"/>
-            </Button.Shadow>
-        </Button>
-        <!--добавить кнопку, для добавления новых пользователей и администраторов-->
+                <Border Grid.Column="1" Grid.Row="24" Grid.ColumnSpan="17" Grid.RowSpan="2" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="40"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="24" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="0,0,0,5" Stroke="Transparent" StrokeThickness="1.2" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Image Source="sms.png"/>
+                </Border>
+                <Label Text="Использовать сервис SMS.ru" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Row="24" TextColor="Black" Grid.RowSpan="2" Grid.ColumnSpan="17"/>
+                <Switch ThumbColor="Black" x:Name="SmsSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="23" Grid.ColumnSpan="3"/>
+
+
+
+                <Border Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="Center" VerticalOptions="Center" Margin="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="40"/>
+                    </Border.StrokeShape>
+                    <Image Source="terr.jpg"/>
+                </Border>
+                <Label TextColor="Black" Text='Уведомление "Террор"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="9" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
+                <Switch ThumbColor="Black" x:Name="TerrorSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="9" Grid.ColumnSpan="3"/>
+                <!--fire-->
+                <Border Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="Center" VerticalOptions="Center" Margin="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="40"/>
+                    </Border.StrokeShape>
+                    <Image Source="fire.png"/>
+                </Border>
+                <Label TextColor="Black" Text='Уведомление "Пожар"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="14" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
+                <Switch  ThumbColor="Black" x:Name="FireSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="14" Grid.ColumnSpan="3"/>
+                <!--bpla-->
+                <Border Grid.Column="1" Grid.Row="19" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="19" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="Center" VerticalOptions="Center" Margin="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="40"/>
+                    </Border.StrokeShape>
+                    <Image Source="bpla.png"/>
+                </Border>
+                <Label TextColor="Black" Text='Уведомление "БПЛА"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="19" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
+                <Switch ThumbColor="Black" x:Name="BplaSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="19" Grid.ColumnSpan="3"/>
+
+                <Button Grid.Column="1" Grid.Row="27" Grid.ColumnSpan="17" Grid.RowSpan="3" FontAttributes="Bold" Text="Отправить тревогу" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5">
+                    <Button.Shadow>
+                        <Shadow Brush="Red" Offset="0,3" Radius="6" Opacity="0.7"/>
+                    </Button.Shadow>
+                </Button>
+            
+                <Button Grid.Column="1" Grid.Row="32" Grid.ColumnSpan="17" Grid.RowSpan="3" FontAttributes="Bold" Text="Назад (временная кнопка)" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5" Clicked="OnExitClicked">
+                    <Button.Shadow>
+                        <Shadow Brush="Gray" Offset="0,5" Radius="2" Opacity="0.5"/>
+                    </Button.Shadow>
+                </Button>     
+            </Grid>
+        </ContentView>
+        <ContentView Grid.Row="1" >
+            <Grid x:Name="SettingAdmin2">
+                <!--временно-->
+                
+                <Border Grid.Column="0" Grid.Row="36" Grid.ColumnSpan="7" Grid.RowSpan="4" Stroke="Black" BackgroundColor="Transparent" StrokeThickness="1.2">
+                    <ImageButton Source ="admin.png" VerticalOptions="Center" MinimumWidthRequest="50" Margin="40,0,70,0"/>
+                </Border>
+                <Border InputTransparent="False" Grid.Column="12" Grid.Row="36" Grid.ColumnSpan="7" Grid.RowSpan="4" Stroke="Black" BackgroundColor="Transparent" StrokeThickness="1.2">
+                    <ImageButton Source="history.png" VerticalOptions="Center" MinimumHeightRequest="50" Margin="50,0,50,50"/>
+                </Border>
+                <Border InputTransparent="False" Grid.Column="6" Grid.Row="35" Grid.ColumnSpan="7" Grid.RowSpan="5" Stroke="Black" BackgroundColor="White" StrokeThickness="1.2">
+                    <ImageButton Source="alarm.png" VerticalOptions="Center"/>
+                </Border>
+                <!--добавить кнопку, для добавления новых пользователей и администраторов-->
+            </Grid>
+        </ContentView>
     </Grid>
 </ContentPage>

@@ -1,29 +1,108 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DiplomObsAlarm.MainPage">
-<!--Содзать функцию в отдельном классе, для рисования этих столбцов и колонок, а потом обращаться к функции в коде и брать разметку из нее
-    кароче тут авто пружинка и авто, * работает как пружинка, она занимает то че дает. авто делает так, чтобы занимало столько сколько нужно-->
-    <Grid x:Name="GeneralSeter" >
-        <Image Source="logo.png" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label Text="Выберите вашу роль" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="18" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="13" Grid.RowSpan="2"/>
-        <Border Stroke="Black" Background="Black" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="Center" VerticalOptions="Center">
+             x:Class="DiplomObsAlarm.MainPage"
+             BackgroundColor="White">
+
+    <Grid x:Name="GeneralSeter" BackgroundColor="White">
+        <Image Source="logo.png" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" 
+               Aspect="AspectFit" 
+               Grid.Row="1" 
+               Grid.RowSpan="2" 
+               Grid.Column="1" 
+               Grid.ColumnSpan="2"/>
+
+        <Label TextColor="Black" 
+            Text="ObsAlarM" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" 
+               FontAttributes="Bold" 
+               FontSize="32" 
+               Grid.Column="3" 
+               Grid.Row="1" 
+               Grid.ColumnSpan="13" 
+               Grid.RowSpan="3"/>
+
+        <!-- Подзаголовок -->
+        <Label Text="Система экстренного оповещения общежития" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" 
+               FontSize="16" 
+               TextColor="#666666"
+               Grid.Column="2" 
+               Grid.Row="3" 
+               Grid.ColumnSpan="15" 
+               Grid.RowSpan="4" 
+               HorizontalTextAlignment="Center"/>
+
+        <!-- Кнопка "Я студент" (черная) -->
+        <Border BackgroundColor="#1A1A1A" 
+                Stroke="Transparent"
+                Grid.Column="1" 
+                Grid.Row="7" 
+                Grid.ColumnSpan="17" 
+                Grid.RowSpan="4"
+                Padding="0"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="60"/>
+                <RoundRectangle CornerRadius="8"/>
             </Border.StrokeShape>
-            <ImageButton Clicked="OnAdminClicked" Source="admin.png"/>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnUserClicked"/>
+            </Border.GestureRecognizers>
+
+            <!-- Центрирование содержимого внутри ячеек -->
+            <VerticalStackLayout HorizontalOptions="Center" 
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                <Label Text="Я студент" 
+                       TextColor="White" 
+                       FontAttributes="Bold" 
+                       FontSize="16"
+                       HorizontalOptions="Center"/>
+                <Label Text="Получать уведомления" 
+                       TextColor="#AAAAAA" 
+                       FontSize="12"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
         </Border>
-        <Border Stroke="Black" Background="Black" Grid.Column="11" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="Center" VerticalOptions="Center">
+
+        <!-- Кнопка "Я администратор" (белая с обводкой) -->
+        <Border BackgroundColor="White" 
+                Stroke="#1A1A1A"
+                StrokeThickness="1.5"
+                Grid.Column="1" 
+                Grid.Row="12" 
+                Grid.ColumnSpan="17" 
+                Grid.RowSpan="4"
+                Padding="0"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="60"/>
+                <RoundRectangle CornerRadius="8"/>
             </Border.StrokeShape>
-            <ImageButton Clicked="OnUserClicked" Source="user.png"/>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnAdminClicked"/>
+            </Border.GestureRecognizers>
+
+            <!-- Центрирование содержимого внутри ячеек -->
+            <VerticalStackLayout HorizontalOptions="Center" 
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                <Label Text="Я администратор" 
+                       TextColor="#1A1A1A" 
+                       FontAttributes="Bold" 
+                       FontSize="16"
+                       HorizontalOptions="Center"/>
+                <Label Text="Отправлять тревоги" 
+                       TextColor="#666666" 
+                       FontSize="12"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
         </Border>
-        <Label Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="3" Text="Админ" HorizontalOptions="Center" VerticalOptions="Start"/>
-        <Label Grid.Row="11" Grid.Column="10" Grid.ColumnSpan="6" Grid.RowSpan="3" Text="Пользователь" HorizontalOptions="Center" VerticalOptions="Start"/>
-        <Label Grid.Row="16" Grid.Column="1" Grid.ColumnSpan="17" Grid.RowSpan="3" Text="Пользователи - будут получать уведомления." HorizontalOptions="Start" VerticalOptions="Center" TextDecorations="Underline"/>
-        <Label Grid.Row="19" Grid.Column="1" Grid.ColumnSpan="17" Grid.RowSpan="4" Text="Администраторы - отправляют уведомления, а пользователи получают их." HorizontalOptions="Start" VerticalOptions="Center" TextDecorations="Underline"/>
-        <Label Grid.Row="31" Grid.Column="1" Grid.ColumnSpan="17" Grid.RowSpan="6" Text="Приложение созданно в целях безопасности студентов и работников, проживающихи работающих в общежитии, для сообщения о различных угрозах тем, кто находится в общежитии и за ее пределами, для большей безопасности. " HorizontalOptions="Start" VerticalOptions="Center" TextDecorations="Underline" FontAttributes="Italic" FontSize="12"/>
+
     </Grid>
 </ContentPage>
-        

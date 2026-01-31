@@ -7,10 +7,10 @@ namespace DiplomObsAlarm;
 
 public static class GridPresets
 {
-    public static void Razmetka(this Grid grid)
+    public static void Razmetka(this Grid grid, int a)
     {
         grid.RowDefinitions.Clear();//тут кароче можно было бы просто создавать через число и звездочку, но кароче так пизже
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < a; i++)
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0.1, GridUnitType.Star) });
 
         grid.ColumnDefinitions.Clear();

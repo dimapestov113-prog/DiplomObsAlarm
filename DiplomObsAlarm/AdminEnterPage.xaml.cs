@@ -5,7 +5,7 @@ public partial class AdminEnterPage : ContentPage
 	public AdminEnterPage()
     {
         InitializeComponent();
-        GeneralSetting.Razmetka();//вызов в autorc 
+        GeneralSetting.Razmetka(40);//вызов в autorc 
     }
     private async void OnExitClicked(object? sender, EventArgs e)
     {

@@ -5,7 +5,9 @@ public partial class AdminPanelPage : ContentPage
 	public AdminPanelPage()
 	{
 		InitializeComponent();
-		SettingAdmin.Razmetka();
+		SettingAdmin.Razmetka(40);
+		SettingAdmin2.Razmetka(40);
+
 	}
 	private async void OnExitClicked(object? sender, EventArgs e)
 	{

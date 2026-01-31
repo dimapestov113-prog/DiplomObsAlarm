@@ -6,7 +6,7 @@
         public MainPage()
         {
             InitializeComponent();
-            GeneralSeter.Razmetka();
+            GeneralSeter.Razmetka(40);
         }
 
         private async void OnAdminClicked(object? sender, EventArgs e)
