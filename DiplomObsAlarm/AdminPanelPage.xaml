@@ -76,21 +76,58 @@
                     </Button.Shadow>
                 </Button>     
             </Grid>
+            
+            
+            
         </ContentView>
-        <ContentView Grid.Row="1" >
-            <Grid x:Name="SettingAdmin2">
-                <!--временно-->
-                
-                <Border Grid.Column="0" Grid.Row="36" Grid.ColumnSpan="7" Grid.RowSpan="4" Stroke="Black" BackgroundColor="Transparent" StrokeThickness="1.2">
-                    <ImageButton Source ="admin.png" VerticalOptions="Center" MinimumWidthRequest="50" Margin="40,0,70,0"/>
+        <ContentView BackgroundColor="Transparent" Grid.Row="1">
+            <Grid BackgroundColor="White" x:Name="SettingAdmin2"
+          HeightRequest="100"
+          VerticalOptions="End">
+                <!--admin-->
+                <Border Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="7"  Grid.RowSpan="7"
+                HeightRequest="55"
+                HorizontalOptions="Fill"
+                VerticalOptions="End"
+                Stroke="Black" 
+                BackgroundColor="Transparent" 
+                StrokeThickness="1.2">
+                    <ImageButton Source="admin.png" 
+                         HorizontalOptions="Fill" 
+                         VerticalOptions="Fill"
+                         Aspect="AspectFit"
+                         Clicked="AdminUser_Clicked"
+                         Padding="7"/>
                 </Border>
-                <Border InputTransparent="False" Grid.Column="12" Grid.Row="36" Grid.ColumnSpan="7" Grid.RowSpan="4" Stroke="Black" BackgroundColor="Transparent" StrokeThickness="1.2">
-                    <ImageButton Source="history.png" VerticalOptions="Center" MinimumHeightRequest="50" Margin="50,0,50,50"/>
+                <!--istoriya-->
+                <Border Grid.Column="12" Grid.Row="5" Grid.ColumnSpan="7" Grid.RowSpan="6"
+                HeightRequest="55"
+                HorizontalOptions="Fill"
+                VerticalOptions="End"
+                Stroke="Black" 
+                BackgroundColor="Transparent" 
+                StrokeThickness="1.2">
+                    <ImageButton Source="history.png" 
+                         HorizontalOptions="Fill" 
+                         VerticalOptions="Fill"
+                         Aspect="AspectFit"
+                                 Clicked="AdminHistory_Clicked"
+                         Padding="5"/>
                 </Border>
-                <Border InputTransparent="False" Grid.Column="6" Grid.Row="35" Grid.ColumnSpan="7" Grid.RowSpan="5" Stroke="Black" BackgroundColor="White" StrokeThickness="1.2">
-                    <ImageButton Source="alarm.png" VerticalOptions="Center"/>
+                <!--alarmsasssasdsosi-->
+                <Border Grid.Column="6" Grid.Row="3" Grid.ColumnSpan="7" Grid.RowSpan="7"
+                HorizontalOptions="Fill"
+                VerticalOptions="End"
+                Stroke="Black" 
+                BackgroundColor="White" 
+                StrokeThickness="1.2">
+                    <ImageButton Source="alarm.png"
+                         HorizontalOptions="Fill" 
+                         VerticalOptions="Fill"
+                         Aspect="AspectFit"
+                                 Clicked="AdminPanel_Clicked"
+                                 Padding="10"/>
                 </Border>
-                <!--добавить кнопку, для добавления новых пользователей и администраторов-->
             </Grid>
         </ContentView>
     </Grid>

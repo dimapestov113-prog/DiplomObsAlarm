@@ -6,9 +6,10 @@ public partial class AdminPanelPage : ContentPage
 	{
 		InitializeComponent();
 		SettingAdmin.Razmetka(40);
-		SettingAdmin2.Razmetka(40);
+		SettingAdmin2.Razmetka(10);
 
 	}
+
 	private async void OnExitClicked(object? sender, EventArgs e)
 	{
 		//await DisplayAlertAsync("нет", "нет", "ок00");
@@ -27,8 +28,16 @@ public partial class AdminPanelPage : ContentPage
 
 	}
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private void AdminPanel_Clicked(object sender, EventArgs e)
     {
-
+		opovesheniya.IsVisible = true;
+    }
+    private void AdminUser_Clicked(object sender, EventArgs e)
+    {
+        opovesheniya.IsVisible = false;
+    }
+    private void AdminHistory_Clicked(object sender, EventArgs e)
+    {
+        opovesheniya.IsVisible = false;
     }
 }
