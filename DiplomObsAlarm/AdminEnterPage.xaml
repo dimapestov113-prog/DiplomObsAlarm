@@ -4,7 +4,7 @@
              x:Class="DiplomObsAlarm.AdminEnterPage"
              Title="AdminEnterPage">
     <Grid x:Name="GeneralSetting" BackgroundColor="White">
-        <Image Source="logo.png" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Image Source="logo.png" HeightRequest="45" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Label TextColor="Black" x:Name="LabelEnter" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="13" Grid.RowSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" Text="Для входа вам необходимо ввести ваш логин и пароль."/>
         <Border BackgroundColor="white" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="17" Grid.RowSpan="3">
             <Border.StrokeShape>

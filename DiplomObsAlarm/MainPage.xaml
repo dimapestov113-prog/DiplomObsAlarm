@@ -7,6 +7,7 @@
     <Grid x:Name="GeneralSeter" BackgroundColor="White">
         <Image Source="logo.png" 
                HorizontalOptions="Center" 
+               HeightRequest="45"
                VerticalOptions="Center" 
                Aspect="AspectFit" 
                Grid.Row="1" 

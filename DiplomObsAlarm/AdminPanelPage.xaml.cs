@@ -7,8 +7,10 @@ public partial class AdminPanelPage : ContentPage
 		InitializeComponent();
 		SettingAdmin.Razmetka(40);
 		SettingAdmin2.Razmetka(10);
+		SettingUsers.Razmetka(40);
+		SettingHistory.Razmetka(40);
 
-	}
+    }
 
 	private async void OnExitClicked(object? sender, EventArgs e)
 	{
@@ -31,13 +33,19 @@ public partial class AdminPanelPage : ContentPage
     private void AdminPanel_Clicked(object sender, EventArgs e)
     {
 		opovesheniya.IsVisible = true;
+        AdminPanel.IsVisible = false;
+		AdminHistory.IsVisible = false;
     }
     private void AdminUser_Clicked(object sender, EventArgs e)
     {
         opovesheniya.IsVisible = false;
+		AdminPanel.IsVisible = true;
+        AdminHistory.IsVisible = false;
     }
     private void AdminHistory_Clicked(object sender, EventArgs e)
     {
         opovesheniya.IsVisible = false;
+        AdminPanel.IsVisible = false;
+        AdminHistory.IsVisible = true;
     }
 }
