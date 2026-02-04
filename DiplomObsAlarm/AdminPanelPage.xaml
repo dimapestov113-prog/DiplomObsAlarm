@@ -25,7 +25,11 @@
                     </Button.Shadow>
                 </Button>
                 <!--таблица с данными-->
-                <Border Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="17" Grid.RowSpan="23"/>
+                <Border Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="17" Grid.RowSpan="23">
+                    <ScrollView>
+                        <VerticalStackLayout x:Name="UsersStack"/>
+                    </ScrollView>
+                </Border>
                 <!-- добавить кнопка -->
                 <Button Grid.Column="1" Grid.Row="36" Grid.ColumnSpan="17" Grid.RowSpan="3" Text="Добавить участников" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
                     <Button.Shadow>
@@ -143,15 +147,15 @@
         <ContentView BackgroundColor="Transparent" Grid.Row="1">
             <Grid BackgroundColor="White" x:Name="SettingAdmin2" HeightRequest="100" VerticalOptions="End">
                 <!--admin-->
-                <Border Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="7"  Grid.RowSpan="7" HeightRequest="55" HorizontalOptions="Fill" VerticalOptions="End" Stroke="Black" BackgroundColor="Transparent" StrokeThickness="1.2">
+                <Border Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="7"  Grid.RowSpan="6" HeightRequest="55" HorizontalOptions="Fill" VerticalOptions="End" Stroke="Black" BackgroundColor="Transparent" StrokeThickness="1.2">
                     <ImageButton Source="admin.png" HorizontalOptions="Fill" VerticalOptions="Fill" Aspect="AspectFit" Clicked="AdminUser_Clicked" Padding="7"/>
                 </Border>
                 <!--istoriya-->
-                <Border Grid.Column="12" Grid.Row="5" Grid.ColumnSpan="7" Grid.RowSpan="6" HeightRequest="55"  HorizontalOptions="Fill" VerticalOptions="End"  Stroke="Black"   BackgroundColor="Transparent"  StrokeThickness="1.2">
+                <Border Grid.Column="12" Grid.Row="4" Grid.ColumnSpan="7" Grid.RowSpan="6" HeightRequest="55"  HorizontalOptions="Fill" VerticalOptions="End"  Stroke="Black"   BackgroundColor="Transparent"  StrokeThickness="1.2">
                     <ImageButton Source="history.png"   HorizontalOptions="Fill"   VerticalOptions="Fill" Aspect="AspectFit" Clicked="AdminHistory_Clicked"  Padding="5"/>
                 </Border>
                 <!--alarmsasssasdsosi-->
-                <Border Grid.Column="6" Grid.Row="3" Grid.ColumnSpan="7" Grid.RowSpan="7" HorizontalOptions="Fill" VerticalOptions="End"  Stroke="Black" BackgroundColor="White"   StrokeThickness="1.2">
+                <Border Grid.Column="6" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="8" HorizontalOptions="Fill" VerticalOptions="End"  Stroke="Black" BackgroundColor="White"   StrokeThickness="1.2">
                     <ImageButton Source="alarm.png" HorizontalOptions="Fill" VerticalOptions="Fill" Aspect="AspectFit"  Clicked="AdminPanel_Clicked"  Padding="10"/>
                 </Border>
             </Grid>
