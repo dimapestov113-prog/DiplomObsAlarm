@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DiplomObsAlarm.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DiplomObsAlarm
 {
@@ -7,12 +8,18 @@ namespace DiplomObsAlarm
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+            //MainPage = new NavigationPage(new MainPage());
+            if (AuthService.IsLoggedIn())
+            {
+                // Сразу на панель админа
+                MainPage = new NavigationPage(new AdminPanelPage());
+            }
+            else
+            {
+                // На страницу входа
+                MainPage = new NavigationPage(new MainPage());
+            }
         }
 
-        //protected override Window CreateWindow(IActivationState? activationState)
-        //{
-        //    return new Window(new AppShell());
-        //}
     }
 }

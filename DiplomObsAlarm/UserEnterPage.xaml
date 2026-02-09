@@ -17,7 +17,7 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10"/>
             </Border.StrokeShape>
-            <Entry TextColor="Black" x:Name="AdminLogin" Placeholder ="+7(___)___-__-__"/>
+            <Entry TextColor="Black" x:Name="AdminLogin" Placeholder ="Введите номер телефона"/>
         </Border>
         <Button Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="7" Grid.RowSpan="3" FontAttributes="Bold" Text="Отмена" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5" Clicked="OnExitClicked">
             <Button.Shadow>

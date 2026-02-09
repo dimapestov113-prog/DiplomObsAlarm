@@ -7,4 +7,8 @@ public partial class UserEnterPage : ContentPage
 		InitializeComponent();
 		UserSetting.Razmetka(40);
     }
+	public async void OnExitClicked(object? sender, EventArgs e)
+    {
+        await Navigation.PopModalAsync();
+    }
 }

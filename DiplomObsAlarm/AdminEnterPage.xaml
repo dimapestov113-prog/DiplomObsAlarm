@@ -10,13 +10,13 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10"/>
             </Border.StrokeShape>
-            <Entry x:Name="AdminPassword" Placeholder ="Пароль:" IsPassword="True"/>
+            <Entry x:Name="AdminPassword" TextColor="Black" Placeholder ="Пароль:" IsPassword="True"/>
         </Border>
         <Border BackgroundColor="White" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="17" Grid.RowSpan="3">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10"/>
             </Border.StrokeShape>
-            <Entry x:Name="AdminLogin" Placeholder ="Логин:" />
+            <Entry TextColor="Black" x:Name="AdminLogin" Placeholder ="Логин:" />
         </Border>
         <Button Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="7" Grid.RowSpan="3" FontAttributes="Bold" Text="Отмена" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5" Clicked="OnExitClicked">
             <Button.Shadow>
