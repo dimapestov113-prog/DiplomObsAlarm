@@ -24,6 +24,7 @@ public partial class AdminEnterPage : ContentPage
     // Кнопка НАЗАД — возврат на MainPage
     private async void OnExitClicked(object? sender, EventArgs e)
     {
+
         await Shell.Current.GoToAsync("//MainPage");
     }
 
@@ -65,7 +66,7 @@ public partial class AdminEnterPage : ContentPage
 
             if (found)
             {
-                AuthService.Login(name);
+                AuthService.LoginAdmin(name);
                 // Переход на панель админа (сбрасываем стек)
                 await Shell.Current.GoToAsync("//AdminPanelPage");
             }

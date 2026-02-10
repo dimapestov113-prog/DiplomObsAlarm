@@ -93,7 +93,7 @@ public partial class AdminPanelPage : ContentPage
 
         if (confirm)
         {
-            AuthService.Logout();
+            Services.AuthService.Logout();
             await Shell.Current.GoToAsync("//MainPage");
         }
         // Если "Нет" — ничего не делаем, остаёмся на странице

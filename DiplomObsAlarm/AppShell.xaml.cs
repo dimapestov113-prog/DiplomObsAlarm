@@ -8,21 +8,48 @@ namespace DiplomObsAlarm
         {
             InitializeComponent();
 
-
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-            Routing.RegisterRoute(nameof(UserEnterPage), typeof(UserEnterPage));
             Routing.RegisterRoute(nameof(AdminEnterPage), typeof(AdminEnterPage));
             Routing.RegisterRoute(nameof(AdminPanelPage), typeof(AdminPanelPage));
+            Routing.RegisterRoute(nameof(UserEnterPage), typeof(UserEnterPage));
+
         }
-        public static void SetStartPage()
+        protected override async void OnNavigated(ShellNavigatedEventArgs args)
         {
-            if (AuthService.IsLoggedIn())
+            base.OnNavigated(args);
+
+            // Только при первом запуске
+            if (args.Current.Location.OriginalString == "//MainPage")
             {
-                Current.GoToAsync("//AdminPanelPage");
+                await CheckAuthAndRedirect();
             }
-            else
+        }
+
+        private async Task CheckAuthAndRedirect()
+        {
+            try
             {
-                Current.GoToAsync("//MainPage");
+                if (!AuthService.IsLoggedIn())
+                    return;
+
+                var role = AuthService.GetUserRole();
+
+                // Небольшая задержка для инициализации
+                await Task.Delay(100);
+
+                switch (role)
+                {
+                    case AuthService.UserRole.Admin:
+                        await GoToAsync("//AdminPanelPage");
+                        break;
+                    case AuthService.UserRole.User:
+                        await GoToAsync("//UserPanelPage");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Auth error: {ex}");
             }
         }
     }

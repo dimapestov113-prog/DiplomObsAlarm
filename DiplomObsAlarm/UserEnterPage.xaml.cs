@@ -12,3 +12,5 @@ public partial class UserEnterPage : ContentPage
         await Shell.Current.GoToAsync("//MainPage");
     }
 }
+//AuthService.LoginUser(phoneNumber);  // <-- LoginUser
+//await Shell.Current.GoToAsync("//UserPanelPage");

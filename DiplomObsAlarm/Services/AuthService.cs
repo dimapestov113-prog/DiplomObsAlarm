@@ -1,46 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Maui.Storage;
 
-namespace DiplomObsAlarm.Services
+namespace DiplomObsAlarm.Services;
+
+public static class AuthService
 {
-    public static class AuthService
+    private const string UserNameKey = "username";
+    private const string UserRoleKey = "userrole";
+    private const string IsLoggedInKey = "isloggedin";
+
+    public enum UserRole
     {
-        private const string IsLoggedInKey = "IsLoggedIn";
-        private const string AdminNameKey = "AdminName";
+        None,
+        Admin,
+        User
+    }
 
-        /// <summary>
-        /// Сохраняет вход админа
-        /// </summary>
-        public static void Login(string adminName)
-        {
-            Preferences.Set(IsLoggedInKey, true);
-            Preferences.Set(AdminNameKey, adminName);
-        }
+    // Вход админа
+    public static void LoginAdmin(string username)
+    {
+        SecureStorage.SetAsync(UserNameKey, username);
+        SecureStorage.SetAsync(UserRoleKey, "admin");
+        SecureStorage.SetAsync(IsLoggedInKey, "true");
+    }
 
-        /// <summary>
-        /// Выход админа
-        /// </summary>
-        public static void Logout()
-        {
-            Preferences.Remove(IsLoggedInKey);
-            Preferences.Remove(AdminNameKey);
-        }
+    // Вход пользователя
+    public static void LoginUser(string username)
+    {
+        SecureStorage.SetAsync(UserNameKey, username);
+        SecureStorage.SetAsync(UserRoleKey, "user");
+        SecureStorage.SetAsync(IsLoggedInKey, "true");
+    }
 
-        /// <summary>
-        /// Проверяет, вошёл ли админ
-        /// </summary>
-        public static bool IsLoggedIn()
-        {
-            return Preferences.Get(IsLoggedInKey, false);
-        }
+    public static void Logout()
+    {
+        SecureStorage.Remove(UserNameKey);
+        SecureStorage.Remove(UserRoleKey);
+        SecureStorage.Remove(IsLoggedInKey);
+    }
 
-        /// <summary>
-        /// Получает имя админа
-        /// </summary>
-        public static string GetAdminName()
+    public static bool IsLoggedIn()
+    {
+        var loggedIn = SecureStorage.GetAsync(IsLoggedInKey).Result;
+        return loggedIn == "true";
+    }
+
+    public static string GetUserName()
+    {
+        return SecureStorage.GetAsync(UserNameKey).Result ?? string.Empty;
+    }
+
+    public static UserRole GetUserRole()
+    {
+        var role = SecureStorage.GetAsync(UserRoleKey).Result;
+        return role switch
         {
-            return Preferences.Get(AdminNameKey, string.Empty);
-        }
+            "admin" => UserRole.Admin,
+            "user" => UserRole.User,
+            _ => UserRole.None
+        };
     }
 }
