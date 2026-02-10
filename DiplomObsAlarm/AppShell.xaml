@@ -6,9 +6,25 @@
     xmlns:local="clr-namespace:DiplomObsAlarm"
     Title="AlarmObs">
 
+    <!-- Скрытые маршруты (не в меню) -->
     <ShellContent
-        Title=""
-        ContentTemplate="{DataTemplate local:MainPage}" 
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage"
+        FlyoutItemIsVisible="False" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate local:UserEnterPage}"
+        Route="UserEnterPage"
+        FlyoutItemIsVisible="False" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate local:AdminEnterPage}"
+        Route="AdminEnterPage"
+        FlyoutItemIsVisible="False" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate local:AdminPanelPage}"
+        Route="AdminPanelPage"
+        FlyoutItemIsVisible="False" />
 
 </Shell>

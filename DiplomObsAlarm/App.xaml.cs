@@ -1,25 +1,28 @@
 ﻿using DiplomObsAlarm.Services;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace DiplomObsAlarm
+namespace DiplomObsAlarm;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
+        InitializeComponent();
+
+        MainPage = new AppShell();
+
+        // Запускаем на главном потоке после инициализации
+        MainThread.BeginInvokeOnMainThread(async () =>
         {
-            InitializeComponent();
-            //MainPage = new NavigationPage(new MainPage());
+            await Task.Delay(100); // Небольшая задержка для инициализации Shell
+
             if (AuthService.IsLoggedIn())
             {
-                // Сразу на панель админа
-                MainPage = new NavigationPage(new AdminPanelPage());
+                await Shell.Current.GoToAsync("//AdminPanelPage");
             }
             else
             {
-                // На страницу входа
-                MainPage = new NavigationPage(new MainPage());
+                await Shell.Current.GoToAsync("//MainPage");
             }
-        }
-
+        });
     }
 }

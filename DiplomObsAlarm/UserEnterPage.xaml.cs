@@ -9,6 +9,6 @@ public partial class UserEnterPage : ContentPage
     }
 	public async void OnExitClicked(object? sender, EventArgs e)
     {
-        await Navigation.PopModalAsync();
+        await Shell.Current.GoToAsync("//MainPage");
     }
 }

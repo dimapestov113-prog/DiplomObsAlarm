@@ -6,9 +6,8 @@ namespace DiplomObsAlarm;
 public partial class AdminEnterPage : ContentPage
 {
     private const string FirebaseUrl = "https://obsalarm-23222-default-rtdb.europe-west1.firebasedatabase.app/Admin.json";
-
     private readonly HttpClient _httpClient;
-    
+
     public AdminEnterPage()
     {
         InitializeComponent();
@@ -22,13 +21,10 @@ public partial class AdminEnterPage : ContentPage
         public int Password { get; set; }
     }
 
-    public async void Exesss()
+    // Кнопка НАЗАД — возврат на MainPage
+    private async void OnExitClicked(object? sender, EventArgs e)
     {
-
-    }
-        private async void OnExitClicked(object? sender, EventArgs e)
-    {
-        await Navigation.PopModalAsync();
+        await Shell.Current.GoToAsync("//MainPage");
     }
 
     private async void OnEnterClicked(object? sender, EventArgs e)
@@ -56,9 +52,6 @@ public partial class AdminEnterPage : ContentPage
         try
         {
             var response = await _httpClient.GetStringAsync(FirebaseUrl);
-
-            System.Diagnostics.Debug.WriteLine($"Ответ Firebase: {response}");
-
             var admins = JsonSerializer.Deserialize<Dictionary<string, Admin>>(response);
 
             if (admins == null)
@@ -67,28 +60,14 @@ public partial class AdminEnterPage : ContentPage
                 return;
             }
 
-            foreach (var admin in admins)
-            {
-                System.Diagnostics.Debug.WriteLine($"Key: {admin.Key}");
-                System.Diagnostics.Debug.WriteLine($"Name: '{admin.Value?.Name}'");
-                System.Diagnostics.Debug.WriteLine($"Password: '{admin.Value?.Password}'");
-            }
-
-            bool found = false;
-            foreach (var admin in admins.Values)
-            {
-                if (admin.Name == name && admin.Password == password)
-                {
-                    found = true;
-                    break;
-                }
-            }
+            bool found = admins.Values.Any(admin =>
+                admin.Name == name && admin.Password == password);
 
             if (found)
             {
-
                 AuthService.Login(name);
-                await Navigation.PushModalAsync(new AdminPanelPage());
+                // Переход на панель админа (сбрасываем стек)
+                await Shell.Current.GoToAsync("//AdminPanelPage");
             }
             else
             {
@@ -98,7 +77,6 @@ public partial class AdminEnterPage : ContentPage
         catch (Exception ex)
         {
             await DisplayAlert("Ошибка", $"Не удалось подключиться: {ex.Message}", "OK");
-            System.Diagnostics.Debug.WriteLine($"Исключение: {ex}");
         }
     }
 }
