@@ -7,15 +7,7 @@
     Title="AlarmObs">
 
     <!-- Скрытые маршруты (не в меню) -->
-    <ShellContent
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage"
-        FlyoutItemIsVisible="False" />
-
-    <ShellContent
-        ContentTemplate="{DataTemplate local:UserEnterPage}"
-        Route="UserEnterPage"
-        FlyoutItemIsVisible="False" />
+    
 
     <ShellContent
         ContentTemplate="{DataTemplate local:AdminEnterPage}"
@@ -27,4 +19,8 @@
         Route="AdminPanelPage"
         FlyoutItemIsVisible="False" />
 
+    <ShellContent
+        ContentTemplate="{DataTemplate local:UserPanelPage}"
+        Route="UserPanelPage"
+        FlyoutItemIsVisible="False" />
 </Shell>

@@ -4,6 +4,7 @@ namespace DiplomObsAlarm.Services;
 
 public static class AuthService
 {
+    private const string UserIdKey = "userid";
     private const string UserNameKey = "username";
     private const string UserRoleKey = "userrole";
     private const string IsLoggedInKey = "isloggedin";
@@ -15,24 +16,18 @@ public static class AuthService
         User
     }
 
-    // Вход админа
-    public static void LoginAdmin(string username)
+    // Универсальный вход
+    public static void Login(string userId, string name, string role)
     {
-        SecureStorage.SetAsync(UserNameKey, username);
-        SecureStorage.SetAsync(UserRoleKey, "admin");
-        SecureStorage.SetAsync(IsLoggedInKey, "true");
-    }
-
-    // Вход пользователя
-    public static void LoginUser(string username)
-    {
-        SecureStorage.SetAsync(UserNameKey, username);
-        SecureStorage.SetAsync(UserRoleKey, "user");
+        SecureStorage.SetAsync(UserIdKey, userId);
+        SecureStorage.SetAsync(UserNameKey, name);
+        SecureStorage.SetAsync(UserRoleKey, role);
         SecureStorage.SetAsync(IsLoggedInKey, "true");
     }
 
     public static void Logout()
     {
+        SecureStorage.Remove(UserIdKey);
         SecureStorage.Remove(UserNameKey);
         SecureStorage.Remove(UserRoleKey);
         SecureStorage.Remove(IsLoggedInKey);
@@ -44,14 +39,15 @@ public static class AuthService
         return loggedIn == "true";
     }
 
-    public static string GetUserName()
-    {
-        return SecureStorage.GetAsync(UserNameKey).Result ?? string.Empty;
-    }
+    public static string GetUserId() =>
+        SecureStorage.GetAsync(UserIdKey).Result ?? string.Empty;
+
+    public static string GetUserName() =>
+        SecureStorage.GetAsync(UserNameKey).Result ?? string.Empty;
 
     public static UserRole GetUserRole()
     {
-        var role = SecureStorage.GetAsync(UserRoleKey).Result;
+        var role = SecureStorage.GetAsync(UserRoleKey).Result?.ToLower();
         return role switch
         {
             "admin" => UserRole.Admin,

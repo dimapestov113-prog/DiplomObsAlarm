@@ -16,7 +16,7 @@
         }
         private async void OnUserClicked(object? sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new UserEnterPage());
+            await Navigation.PushModalAsync(new UserPanelPage());
             //await DisplayAlertAsync("Кнопка", "Пользователь", "Ок");
         }
     }

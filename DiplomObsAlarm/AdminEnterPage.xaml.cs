@@ -5,7 +5,7 @@ namespace DiplomObsAlarm;
 
 public partial class AdminEnterPage : ContentPage
 {
-    private const string FirebaseUrl = "https://obsalarm-23222-default-rtdb.europe-west1.firebasedatabase.app/Admin.json";
+    private const string FirebaseUrl = "https://obsalarm-23222-default-rtdb.europe-west1.firebasedatabase.app/users.json";
     private readonly HttpClient _httpClient;
 
     public AdminEnterPage()
@@ -15,24 +15,48 @@ public partial class AdminEnterPage : ContentPage
         _httpClient = new HttpClient();
     }
 
-    public class Admin
+    public class User
     {
         public string Name { get; set; }
-        public int Password { get; set; }
+        public string Login { get; set; }
+
+        // Принимаем любой тип (число или строка)
+        public JsonElement Num { get; set; }
+        public JsonElement Password { get; set; }
+
+        public string Role { get; set; }
+
+        // Методы для получения строк
+        public string GetNum()
+        {
+            if (Num.ValueKind == JsonValueKind.Number)
+                return Num.GetInt32().ToString();
+            if (Num.ValueKind == JsonValueKind.String)
+                return Num.GetString();
+            return Num.ToString();
+        }
+
+        public string GetPassword()
+        {
+            if (Password.ValueKind == JsonValueKind.Number)
+                return Password.GetInt32().ToString();
+            if (Password.ValueKind == JsonValueKind.String)
+                return Password.GetString();
+            return Password.ToString();
+        }
     }
 
-    // Кнопка НАЗАД — возврат на MainPage
-    private async void OnExitClicked(object? sender, EventArgs e)
+    // Кнопка НАЗАД — закрываем приложение
+    private void OnExitClicked(object? sender, EventArgs e)
     {
-
-        await Shell.Current.GoToAsync("//MainPage");
+        Application.Current?.Quit();
     }
 
     private async void OnEnterClicked(object? sender, EventArgs e)
     {
-        string name = AdminLogin.Text?.Trim();
+        string login = AdminLogin.Text?.Trim();
 
-        if (string.IsNullOrEmpty(name))
+        if (string.IsNullOrEmpty(login))
         {
             await DisplayAlert("Ошибка", "Введите логин", "OK");
             return;
@@ -44,35 +68,47 @@ public partial class AdminEnterPage : ContentPage
             return;
         }
 
-        if (!int.TryParse(AdminPassword.Text, out int password))
-        {
-            await DisplayAlert("Ошибка", "Пароль должен быть числом", "OK");
-            return;
-        }
+        string password = AdminPassword.Text;
 
         try
         {
             var response = await _httpClient.GetStringAsync(FirebaseUrl);
-            var admins = JsonSerializer.Deserialize<Dictionary<string, Admin>>(response);
+            var users = JsonSerializer.Deserialize<Dictionary<string, User>>(response);
 
-            if (admins == null)
+            if (users == null)
             {
                 await DisplayAlert("Ошибка", "Не удалось загрузить данные", "OK");
                 return;
             }
 
-            bool found = admins.Values.Any(admin =>
-                admin.Name == name && admin.Password == password);
+            // Ищем по логину и паролю (сравниваем как строки)
+            var foundUser = users.FirstOrDefault(u =>
+                u.Value.Login == login && u.Value.GetPassword() == password);
 
-            if (found)
+            if (foundUser.Value == null)
             {
-                AuthService.LoginAdmin(name);
-                // Переход на панель админа (сбрасываем стек)
+                await DisplayAlert("Ошибка", "Неверный логин или пароль", "OK");
+                return;
+            }
+
+            var user = foundUser.Value;
+            var userId = foundUser.Key;
+
+            // Сохраняем сессию
+            AuthService.Login(userId, user.Name, user.Role);
+
+            // Переход по роли
+            if (user.Role == "admin")
+            {
                 await Shell.Current.GoToAsync("//AdminPanelPage");
+            }
+            else if (user.Role == "user")
+            {
+                await Shell.Current.GoToAsync("//UserPanelPage");
             }
             else
             {
-                await DisplayAlert("Ошибка", "Неверный логин или пароль", "OK");
+                await DisplayAlert("Ошибка", "Неизвестная роль пользователя", "OK");
             }
         }
         catch (Exception ex)

@@ -1,6 +1,5 @@
 using Firebase.Database;
 using Microsoft.Maui.Controls.Shapes;
-using Microsoft.Maui.Storage;
 using DiplomObsAlarm.Services;
 
 namespace DiplomObsAlarm;
@@ -12,6 +11,7 @@ public partial class AdminPanelPage : ContentPage
     public AdminPanelPage()
     {
         InitializeComponent();
+        // Убрал пробел в конце URL!
         _firebase = new FirebaseClient("https://obsalarm-23222-default-rtdb.europe-west1.firebasedatabase.app/");
         SettingAdmin.Razmetka(40);
         SettingAdmin2.Razmetka(10);
@@ -81,7 +81,7 @@ public partial class AdminPanelPage : ContentPage
         public string Num { get; set; }
     }
 
-    // Кнопка ВЫХОД — с подтверждением
+    // ИСПРАВЛЕНО: переход на AdminEnterPage, не MainPage!
     private async void OnExitClicked(object? sender, EventArgs e)
     {
         bool confirm = await DisplayAlert(
@@ -93,23 +93,14 @@ public partial class AdminPanelPage : ContentPage
 
         if (confirm)
         {
-            Services.AuthService.Logout();
-            await Shell.Current.GoToAsync("//MainPage");
+            AuthService.Logout();
+            await Shell.Current.GoToAsync("//AdminEnterPage");
         }
-        // Если "Нет" — ничего не делаем, остаёмся на странице
     }
 
-    private void TerrorSwitch_Toggled()
-    {
-    }
-
-    private void FireSwitch_Toggled()
-    {
-    }
-
-    private void BplaSwitch_Toggled()
-    {
-    }
+    private void TerrorSwitch_Toggled(object sender, ToggledEventArgs e) { }
+    private void FireSwitch_Toggled(object sender, ToggledEventArgs e) { }
+    private void BplaSwitch_Toggled(object sender, ToggledEventArgs e) { }
 
     private void AdminPanel_Clicked(object sender, EventArgs e)
     {
