@@ -7,7 +7,7 @@ public partial class AppShell : Shell
     public AppShell()
     {
         InitializeComponent();
-
+        FlyoutBehavior = FlyoutBehavior.Disabled;
         Routing.RegisterRoute(nameof(AdminEnterPage), typeof(AdminEnterPage));
         Routing.RegisterRoute(nameof(AdminPanelPage), typeof(AdminPanelPage));
         Routing.RegisterRoute(nameof(UserPanelPage), typeof(UserPanelPage));
