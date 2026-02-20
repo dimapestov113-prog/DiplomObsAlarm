@@ -5,7 +5,7 @@ namespace DiplomObsAlarm.Services;
 public static class AuthService
 {
     private const string UserIdKey = "userid";
-    private const string UserNameKey = "username";
+    private const string UserLoginKey = "userlogin";
     private const string UserRoleKey = "userrole";
     private const string IsLoggedInKey = "isloggedin";
 
@@ -16,38 +16,36 @@ public static class AuthService
         User
     }
 
-    // Универсальный вход
-    public static void Login(string userId, string name, string role)
+    public static void Login(string userId, string login, string role)
     {
-        SecureStorage.SetAsync(UserIdKey, userId);
-        SecureStorage.SetAsync(UserNameKey, name);
-        SecureStorage.SetAsync(UserRoleKey, role);
-        SecureStorage.SetAsync(IsLoggedInKey, "true");
+        SecureStorage.Default.SetAsync(UserIdKey, userId);
+        SecureStorage.Default.SetAsync(UserLoginKey, login);
+        SecureStorage.Default.SetAsync(UserRoleKey, role);
+        SecureStorage.Default.SetAsync(IsLoggedInKey, "true");
     }
 
     public static void Logout()
     {
-        SecureStorage.Remove(UserIdKey);
-        SecureStorage.Remove(UserNameKey);
-        SecureStorage.Remove(UserRoleKey);
-        SecureStorage.Remove(IsLoggedInKey);
+        SecureStorage.Default.Remove(UserIdKey);
+        SecureStorage.Default.Remove(UserLoginKey);
+        SecureStorage.Default.Remove(UserRoleKey);
+        SecureStorage.Default.Remove(IsLoggedInKey);
     }
 
     public static bool IsLoggedIn()
     {
-        var loggedIn = SecureStorage.GetAsync(IsLoggedInKey).Result;
+        var loggedIn = SecureStorage.Default.GetAsync(IsLoggedInKey).Result;
         return loggedIn == "true";
     }
 
-    public static string GetUserId() =>
-        SecureStorage.GetAsync(UserIdKey).Result ?? string.Empty;
-
-    public static string GetUserName() =>
-        SecureStorage.GetAsync(UserNameKey).Result ?? string.Empty;
+    public static string GetUserId()
+    {
+        return SecureStorage.Default.GetAsync(UserIdKey).Result ?? string.Empty;
+    }
 
     public static UserRole GetUserRole()
     {
-        var role = SecureStorage.GetAsync(UserRoleKey).Result?.ToLower();
+        var role = SecureStorage.Default.GetAsync(UserRoleKey).Result?.ToLower();
         return role switch
         {
             "admin" => UserRole.Admin,

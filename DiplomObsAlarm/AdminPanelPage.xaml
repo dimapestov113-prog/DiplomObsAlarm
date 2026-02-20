@@ -13,13 +13,13 @@
                 <!--че делать текст-->
                 <Label TextColor="Black" Text="Добавляйте новые номера пользователей, выдавайте им роли, редактируйте при ошибке и удаляйте, если номер не нужен" HorizontalOptions="Center" Grid.Column="1" Grid.Row="5" FontSize="13" Grid.RowSpan="3" VerticalOptions="Center" Grid.ColumnSpan="17"/>
                 <!-- админ кнопка таблица-->
-                <Button Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="7" Grid.RowSpan="3" Text="Администраторы" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
+                <Button Grid.Column="1" Clicked="AdminUser_Clicked" Grid.Row="8" Grid.ColumnSpan="7" Grid.RowSpan="3" Text="Администраторы" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
                     <Button.Shadow>
                         <Shadow Brush="Gray" Offset="0,3" Radius="6" Opacity="0.7"/>
                     </Button.Shadow>
                 </Button>
                 <!-- пользователь кнопка таблица-->
-                <Button Grid.Column="11" Grid.Row="8" Grid.ColumnSpan="7" Grid.RowSpan="3" Text="Пользователи" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
+                <Button Grid.Column="11" Clicked="UserUser_Clicked" Grid.Row="8" Grid.ColumnSpan="7" Grid.RowSpan="3" Text="Пользователи" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
                     <Button.Shadow>
                         <Shadow Brush="Gray" Offset="0,3" Radius="6" Opacity="0.7"/>
                     </Button.Shadow>
@@ -31,7 +31,7 @@
                     </ScrollView>
                 </Border>
                 <!-- добавить кнопка -->
-                <Button Grid.Column="1" Grid.Row="36" Grid.ColumnSpan="17" Grid.RowSpan="3" Text="Добавить участников" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
+                <Button Grid.Column="1" Clicked="AddUser_Clicked" Grid.Row="36" Grid.ColumnSpan="17" Grid.RowSpan="3" Text="Добавить участников" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
                     <Button.Shadow>
                         <Shadow Brush="Gray" Offset="0,3" Radius="6" Opacity="0.7"/>
                     </Button.Shadow>
