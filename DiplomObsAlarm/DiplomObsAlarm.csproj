@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-windows10.0.19041.0</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
 
 		<!-- Note for MacCatalyst:
@@ -19,7 +19,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>DiplomObsAlarm</ApplicationTitle>
+		<ApplicationTitle>ObsAlarM</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.diplomobsalarm</ApplicationId>
@@ -67,9 +67,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\google-services.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <GoogleServicesJson Include="Platforms\Android\google-services.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="FirebaseDatabase.net" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+		<PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -83,6 +92,10 @@
 	    <DependentUpon>UserPanelPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
+	
+	<ItemGroup>
+		<MauiAsset Include="Resources\Raw\siren.mp3" LogicalName="siren.mp3" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="AdminEnterPage.xaml">
@@ -94,6 +107,24 @@
 	  <MauiXaml Update="UserPanelPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+	  <PackageReference Include="Xamarin.AndroidX.Core">
+	    <Version>1.17.0.1</Version>
+	  </PackageReference>
+	  <PackageReference Include="Xamarin.AndroidX.Work.Runtime">
+	    <Version>2.11.0.1</Version>
+	  </PackageReference>
+	  <PackageReference Include="Xamarin.Firebase.Messaging">
+	    <Version>125.0.1.1</Version>
+	  </PackageReference>
+	  <PackageReference Include="Xamarin.GooglePlayServices.Base">
+	    <Version>118.9.0.1</Version>
+	  </PackageReference>
+	  <PackageReference Include="Xamarin.GooglePlayServices.Tasks">
+	    <Version>118.4.0.2</Version>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>

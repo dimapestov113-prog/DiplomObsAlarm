@@ -2,29 +2,137 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DiplomObsAlarm.UserPanelPage"
-             Title="UserPanelPage">
-    <Grid x:Name="UserSetting" BackgroundColor="White">
-        <Image Source="logo.png" HeightRequest="45" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label TextColor="Black" Text="Активируйте свой номер телефона, для отправки sms на него." HorizontalOptions="Center" Grid.Column="1" Grid.Row="5" FontSize="15" Grid.RowSpan="3" VerticalOptions="Center" Grid.ColumnSpan="17"/>
-        <Label TextColor="Black" x:Name="LabelEnter" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="13" Grid.RowSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" Text="Авторизация пользователя."/>
-        <Border BackgroundColor="white" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="17" Grid.RowSpan="3">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="10"/>
-            </Border.StrokeShape>
-            <Entry TextColor="Black" x:Name="AdminPassword" Placeholder ="Пароль:" IsPassword="True"/>
-        </Border>
-        <Border BackgroundColor="White" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="17" Grid.RowSpan="3">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="10"/>
-            </Border.StrokeShape>
-            <Entry TextColor="Black" x:Name="AdminLogin" Placeholder ="Введите номер телефона"/>
-        </Border>
-        <Button Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="7" Grid.RowSpan="3" FontAttributes="Bold" Text="Отмена" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5" Clicked="OnExitClicked">
-            <Button.Shadow>
-                <Shadow Brush="Gray" Offset="0,5" Radius="2" Opacity="0.5"/>
-            </Button.Shadow>
-        </Button>
-        <Label TextColor="Black" HorizontalOptions="Center" FontSize="13" Grid.ColumnSpan="17" Grid.RowSpan="7" Grid.Row="20" Grid.Column="1" Text="Если вы являетесь новым администратором и не можете войти в приложение, то обратитесь к заведующим общежития. Логины и пароли выдаются строго ими. В течении 3-х дней вам создадут ваш личный логин и пароль, для входа."/>
-        <Label TextColor="Black" Grid.Column="1" Grid.Row="36" Grid.ColumnSpan="17" Grid.RowSpan="4" FontAttributes="Italic" FontSize="10" Text="Данные для администрации хранить строго в секрете. Последстивия будут серьезными (кастрация(()"/>
+             Title="Панель пользователя"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="auto,*,auto" Padding="20">
+
+        <!-- Заголовок и информация о пользователе -->
+        <VerticalStackLayout Grid.Row="0" Spacing="15" Margin="0,0,0,20">
+
+            <Label Text="Панель пользователя" 
+                   FontSize="24" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="Black"/>
+
+            <!-- Карточка пользователя -->
+            <Border Stroke="Gray" 
+                    StrokeThickness="1" 
+                    StrokeShape="RoundRectangle 10"
+                    Padding="15"
+                    BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label x:Name="LblLogin" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label x:Name="LblPhone" 
+                           FontSize="14" 
+                           TextColor="Gray"/>
+                    <Label x:Name="LblRoom" 
+                           FontSize="14" 
+                           TextColor="Gray"/>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- Основная область -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="15">
+
+                <!-- Индикатор загрузки -->
+                <ActivityIndicator x:Name="ActivityIndicator" 
+                                   IsRunning="True" 
+                                   IsVisible="True"
+                                   Color="Gray"
+                                   HorizontalOptions="Center"/>
+
+                <!-- Статус ожидания -->
+                <Label x:Name="LblStatus" 
+                       Text="Ожидание тревог..." 
+                       FontSize="18" 
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="Gray"/>
+
+                <!-- Карточка тревоги -->
+                <Border x:Name="AlertCard" 
+                        Stroke="Red" 
+                        StrokeThickness="2" 
+                        StrokeShape="RoundRectangle 15"
+                        Padding="20"
+                        BackgroundColor="WhiteSmoke"
+                        IsVisible="False">
+
+                    <VerticalStackLayout Spacing="15">
+
+                        <!-- Иконка тревоги -->
+                        <Image Source="alarm.png" 
+                               WidthRequest="80" 
+                               HeightRequest="80"
+                               HorizontalOptions="Center"/>
+
+                        <!-- Тип тревоги -->
+                        <Label x:Name="LblAlertType" 
+                               FontSize="22" 
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               TextColor="Red"
+                               HorizontalTextAlignment="Center"/>
+
+                        <!-- Время начала -->
+                        <Label x:Name="LblAlertTime" 
+                               FontSize="14" 
+                               HorizontalOptions="Center"
+                               TextColor="Gray"/>
+
+                        <!-- Статус активности -->
+                        <Label x:Name="LblAlertStatus" 
+                               FontSize="14" 
+                               HorizontalOptions="Center"
+                               TextColor="Orange"
+                               IsVisible="False"/>
+
+                        <!-- Сообщение -->
+                        <Label Text="ВНИМАНИЕ!&#10;&#10;Произошла чрезвычайная ситуация!&#10;&#10;Следуйте инструкциям администрации!"
+                               FontSize="16"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               TextColor="Red"/>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Кнопки -->
+        <VerticalStackLayout Grid.Row="2" Spacing="10" Margin="0,20,0,0">
+
+            <!-- Кнопка отключения тревоги -->
+            <Button x:Name="BtnDismiss" 
+                    Text="Отключить уведомление"
+                    BackgroundColor="Orange"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    IsVisible="False"
+                    HorizontalOptions="Center"
+                    WidthRequest="250"/>
+
+            <!-- Кнопка выхода -->
+            <Button Text="Выйти"
+                    BackgroundColor="LightGray"
+                    TextColor="Black"
+                    CornerRadius="8"
+                    HeightRequest="45"
+                    HorizontalOptions="Center"
+                    WidthRequest="150"
+                    Clicked="OnExitClicked"/>
+        </VerticalStackLayout>
+
     </Grid>
 </ContentPage>

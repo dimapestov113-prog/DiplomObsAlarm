@@ -1,5 +1,9 @@
 using DiplomObsAlarm.Services;
+using Firebase.Database.Query;
+using Microsoft.Extensions.Logging.Abstractions;
 using System.Text.Json;
+using DiplomObsAlarm.Models;
+
 
 namespace DiplomObsAlarm;
 
@@ -15,105 +19,37 @@ public partial class AdminEnterPage : ContentPage
         _httpClient = new HttpClient();
     }
 
-    public class User
+
+
+    private async void OnEnterClicked(object sender, EventArgs e)
     {
-        public string Name { get; set; }
-        public string Login { get; set; }
-
-        // Принимаем любой тип (число или строка)
-        public JsonElement Num { get; set; }
-        public JsonElement Password { get; set; }
-
-        public string Role { get; set; }
-
-        // Методы для получения строк
-        public string GetNum()
-        {
-            if (Num.ValueKind == JsonValueKind.Number)
-                return Num.GetInt32().ToString();
-            if (Num.ValueKind == JsonValueKind.String)
-                return Num.GetString();
-            return Num.ToString();
-        }
-
-        public string GetPassword()
-        {
-            if (Password.ValueKind == JsonValueKind.Number)
-                return Password.GetInt32().ToString();
-            if (Password.ValueKind == JsonValueKind.String)
-                return Password.GetString();
-            return Password.ToString();
-        }
-    }
-
-    // Кнопка НАЗАД — закрываем приложение
-    private void OnExitClicked(object? sender, EventArgs e)
-    {
-        Application.Current?.Quit();
-    }
-
-    private async void OnEnterClicked(object? sender, EventArgs e)
-    {
-        string login = AdminLogin.Text?.Trim();
-
-        if (string.IsNullOrEmpty(login))
-        {
-            await DisplayAlert("Ошибка", "Введите логин", "OK");
-            return;
-        }
-
-        if (string.IsNullOrEmpty(AdminPassword.Text))
-        {
-            await DisplayAlert("Ошибка", "Введите пароль", "OK");
-            return;
-        }
-
+        string login = AdminLogin.Text;
         string password = AdminPassword.Text;
 
-        try
+        var users = await App.Firebase.Child("users").OnceAsync<User>();
+
+        var user = users.FirstOrDefault(u =>
+            u.Object.Login == login &&
+            u.Object.Password == password);
+
+        if (user == null)
         {
-            var response = await _httpClient.GetStringAsync(FirebaseUrl);
-            var users = JsonSerializer.Deserialize<Dictionary<string, User>>(response);
-
-            if (users == null)
-            {
-                await DisplayAlert("Ошибка", "Не удалось загрузить данные", "OK");
-                return;
-            }
-
-            // Ищем по логину и паролю (сравниваем как строки)
-            var foundUser = users.FirstOrDefault(u =>
-                u.Value.Login == login && u.Value.GetPassword() == password);
-
-            if (foundUser.Value == null)
-            {
-                await DisplayAlert("Ошибка", "Неверный логин или пароль", "OK");
-                return;
-            }
-
-            var user = foundUser.Value;
-            var userId = foundUser.Key;
-
-            // Сохраняем сессию
-            AuthService.Login(userId, user.Name, user.Role);
-
-            // Переход по роли
-            if (user.Role == "admin")
-            {
-                await Shell.Current.GoToAsync("//AdminPanelPage");
-            }
-            else if (user.Role == "user")
-            {
-                await Shell.Current.GoToAsync("//UserPanelPage");
-            }
-            else
-            {
-                await DisplayAlert("Ошибка", "Неизвестная роль пользователя", "OK");
-            }
+            await DisplayAlert("Ошибка", "Неверный логин или пароль", "OK");
+            return;
         }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Ошибка", $"Не удалось подключиться: {ex.Message}", "OK");
-        }
+
+        // Меняем activity на 1 в БД
+        await App.Firebase.Child("users").Child(user.Key).Child("activity").PutAsync(1);
+
+        // Сохраняем сессию
+        Preferences.Set("IsLoged", 1);
+        Preferences.Set("UserKey", user.Key);
+        Preferences.Set("UserRole", user.Object.role);
+
+        // Переход на панель по роли
+        if (user.Object.role == "admin")
+            Application.Current.MainPage = new AdminPanelPage(user.Key);
+        else
+            Application.Current.MainPage = new UserPanelPage(user.Key);
     }
 }

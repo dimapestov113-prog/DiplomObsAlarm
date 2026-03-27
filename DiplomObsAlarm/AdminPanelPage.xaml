@@ -13,13 +13,13 @@
                 <!--че делать текст-->
                 <Label TextColor="Black" Text="Добавляйте новые номера пользователей, выдавайте им роли, редактируйте при ошибке и удаляйте, если номер не нужен" HorizontalOptions="Center" Grid.Column="1" Grid.Row="5" FontSize="13" Grid.RowSpan="3" VerticalOptions="Center" Grid.ColumnSpan="17"/>
                 <!-- админ кнопка таблица-->
-                <Button Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="7" Grid.RowSpan="3" Text="Администраторы" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
+                <Button Grid.Column="1" Clicked="FilterUsers_Clicked" x:Name="BtnFilterAdmins" Grid.Row="8" Grid.ColumnSpan="7" Grid.RowSpan="3" Text="Администраторы" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
                     <Button.Shadow>
                         <Shadow Brush="Gray" Offset="0,3" Radius="6" Opacity="0.7"/>
                     </Button.Shadow>
                 </Button>
                 <!-- пользователь кнопка таблица-->
-                <Button Grid.Column="11" Grid.Row="8" Grid.ColumnSpan="7" Grid.RowSpan="3" Text="Пользователи" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
+                <Button Grid.Column="11"  Clicked="FilterUsers_Clicked" x:Name="BtnFilterUsers" Grid.Row="8" Grid.ColumnSpan="7" Grid.RowSpan="3" Text="Пользователи" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
                     <Button.Shadow>
                         <Shadow Brush="Gray" Offset="0,3" Radius="6" Opacity="0.7"/>
                     </Button.Shadow>
@@ -31,7 +31,10 @@
                     </ScrollView>
                 </Border>
                 <!-- добавить кнопка -->
-                <Button Grid.Column="1" Grid.Row="36" Grid.ColumnSpan="17" Grid.RowSpan="3" Text="Добавить участников" TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="10" BackgroundColor="White">
+                <Button x:Name="BtnAddUser" 
+        Grid.Column="1" Grid.Row="36" Grid.ColumnSpan="17" Grid.RowSpan="3" 
+        Text="➕ Добавить" Clicked="AddUser_Clicked"
+        TextColor="Black" FontSize="12" CornerRadius="8" HeightRequest="40" BackgroundColor="White">
                     <Button.Shadow>
                         <Shadow Brush="Gray" Offset="0,3" Radius="6" Opacity="0.7"/>
                     </Button.Shadow>
@@ -58,9 +61,9 @@
                     <Image Source="sms.png"/>
                 </Border>
                 <!-- текст смс -->
-                <Label Text="Использовать сервис SMS.ru" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Row="24" TextColor="Black" Grid.RowSpan="2" Grid.ColumnSpan="17"/>
+                <Label  Text="Использовать сервис SMS.ru" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Row="24" TextColor="Black" Grid.RowSpan="2" Grid.ColumnSpan="17"/>
                 <!-- свич смс -->
-                <Switch ThumbColor="Black" x:Name="SmsSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="23" Grid.ColumnSpan="3"/>
+                <Switch ThumbColor="Black" Toggled="SmsSwitch_Toggled" x:Name="SmsSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="23" Grid.ColumnSpan="3"/>
                 <!-- бордер террор -->
                 <Border Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
                     <Border.StrokeShape>
@@ -77,7 +80,7 @@
                 <!-- текст террор -->
                 <Label TextColor="Black" Text='Уведомление "Террор"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="9" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
                 <!-- свич террор -->
-                <Switch ThumbColor="Black" x:Name="TerrorSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="9" Grid.ColumnSpan="3"/>
+                <Switch ThumbColor="Black" Toggled="TerrorSwitch_Toggled" x:Name="TerrorSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="9" Grid.ColumnSpan="3"/>
                 <!--fire-->
                 <Border Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
                     <Border.StrokeShape>
@@ -94,7 +97,7 @@
                 <!-- текст пожар -->
                 <Label TextColor="Black" Text='Уведомление "Пожар"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="14" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
                 <!-- свич пожар -->
-                <Switch  ThumbColor="Black" x:Name="FireSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="14" Grid.ColumnSpan="3"/>
+                <Switch  ThumbColor="Black" Toggled="FireSwitch_Toggled" x:Name="FireSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="14" Grid.ColumnSpan="3"/>
                 <!--bpla-->
                 <Border Grid.Column="1" Grid.Row="19" Grid.ColumnSpan="17" Grid.RowSpan="4" Stroke="Black" StrokeThickness="1.2" BackgroundColor="Transparent">
                     <Border.StrokeShape>
@@ -111,9 +114,9 @@
                 <!-- текст бпла -->
                 <Label TextColor="Black" Text='Уведомление "БПЛА"' FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Grid.Row="19" Grid.ColumnSpan="9" Grid.RowSpan="4"/>
                 <!-- свич бпла -->
-                <Switch ThumbColor="Black" x:Name="BplaSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="19" Grid.ColumnSpan="3"/>
+                <Switch ThumbColor="Black" Toggled="BplaSwitch_Toggled" x:Name="BplaSwitch" IsToggled="False" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="15" Grid.RowSpan="4" Grid.Row="19" Grid.ColumnSpan="3"/>
                 <!-- кнопка отправить (проверяем сколько активных свичей и подтверждаем отправку)  -->
-                <Button Grid.Column="1" Grid.Row="27" Grid.ColumnSpan="17" Grid.RowSpan="3" FontAttributes="Bold" Text="Отправить тревогу" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5">
+                <Button Clicked="SendAlert_Clicked" x:Name="AlertButton" Grid.Column="1" Grid.Row="27" Grid.ColumnSpan="17" Grid.RowSpan="3" FontAttributes="Bold" Text="Отправить тревогу" TextColor="Black" FontSize="16" CornerRadius="8" HeightRequest="10" BackgroundColor="White" Padding="10,5">
                     <Button.Shadow>
                         <Shadow Brush="Red" Offset="0,3" Radius="6" Opacity="0.7"/>
                     </Button.Shadow>
@@ -135,14 +138,19 @@
                 <Label TextColor="Black" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="13" Grid.RowSpan="2" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" FontAttributes="Bold" Text="История тревог"/>
                 <!--че делать текст-->
                 <Label TextColor="Black" Text="Последний месяц пользования тревогами" HorizontalOptions="Center" Grid.Column="1" Grid.Row="3" FontSize="13" Grid.RowSpan="3" VerticalOptions="Center" Grid.ColumnSpan="17"/>
-                <Border Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="17" Grid.RowSpan="33"/>
+
+                <!-- 🔥 Список истории (добавлено) -->
+                <Border Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="17" Grid.RowSpan="33" Stroke="Gray" StrokeThickness="1">
+                    <ScrollView>
+                        <VerticalStackLayout x:Name="HistoryStack" Padding="8"/>
+                    </ScrollView>
+                </Border>
+
             </Grid>
         </ContentView>
-        
-        
-        
-        
-        
+
+
+
         <!-- 2 контент вью -->
         <ContentView BackgroundColor="Transparent" Grid.Row="1">
             <Grid BackgroundColor="White" x:Name="SettingAdmin2" HeightRequest="100" VerticalOptions="End">

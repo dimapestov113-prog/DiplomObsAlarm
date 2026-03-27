@@ -4,9 +4,14 @@ using System.Text;
 
 namespace DiplomObsAlarm.Models
 {
-    class Admin
+    public class User
     {
-        public string Name{ get; set; }
-        public string Password{ get; set; }
+        public string Key { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public int activity { get; set; }
+        public string role { get; set; }
+        public string Phone { get; set; }
+        public string RoomNumber { get; set; }
     }
 }

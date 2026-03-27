@@ -12,7 +12,6 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(AdminPanelPage), typeof(AdminPanelPage));
         Routing.RegisterRoute(nameof(UserPanelPage), typeof(UserPanelPage));
 
-        // НЕ вызываем CheckAuth здесь!
     }
 
     // Переопределяем метод появления страницы

@@ -7,7 +7,7 @@
     FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="False">   
-    <!--  FlyoutBehavior="Disabled" отключить адидас хуйню -->
+    <!--  FlyoutBehavior="Disabled" отключить 3 полоски-->
     <!-- Скрытые маршруты (не в меню) -->
     
 
